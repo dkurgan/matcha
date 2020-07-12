@@ -1,0 +1,35 @@
+{
+  "name": "matcha",
+  "version": "1.0.0",
+  "description": "Tinder clone project",
+  "main": "server.js",
+  "scripts": {
+    "start:build": "tsc -w",
+    "start:run": "nodemon build/server.js",
+    "start": "concurrently npm:start:*",
+    "client": "cd ../client && npm start",
+    "dev": "concurrently \"npm run start\" \"npm run client\""
+  },
+  "author": "Danila Kurgan",
+  "license": "ISC",
+  "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/body-parser": "^1.19.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.6",
+    "@types/express-validator": "^3.0.0",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/mongodb": "^3.5.25",
+    "@types/mongoose": "^5.7.29",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.21",
+    "nodemon": "^2.0.4"
+  }
+}
