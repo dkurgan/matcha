@@ -19,7 +19,7 @@ class Login extends React.Component<{loginUser: Function}>{
                 <Grid container justify="center">
                     <form>
                     <Grid justify="center" container>
-                        <TextField onChange={(e)=> this.setState({username: e.target.value})} placeholder="Email"></TextField>
+                        <TextField onChange={(e)=> this.setState({username: e.target.value})}  placeholder="Email"></TextField>
                     </Grid>
                     <Grid justify="center" container>
                         <TextField onChange={(e)=> this.setState({password: e.target.value})} placeholder="Password"></TextField>

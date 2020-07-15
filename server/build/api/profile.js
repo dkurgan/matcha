@@ -45,14 +45,14 @@ var verifyPassword = require('../middleware/verifyPassword');
 var express_validator_1 = require("express-validator");
 //Create Profile
 router.post('/create', checkToken, express_validator_1.body('gender'), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var err, _a, music, bio, gender, location, profile, prof;
+    var err, _a, hobby, bio, gender, location, profile, prof;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 err = express_validator_1.validationResult(req);
                 if (!err.isEmpty())
                     res.status(400).json({ msg: "Gender is required" });
-                _a = req.body, music = _a.music, bio = _a.bio, gender = _a.gender, location = _a.location;
+                _a = req.body, hobby = _a.hobby, bio = _a.bio, gender = _a.gender, location = _a.location;
                 return [4 /*yield*/, Profile.findOne({ username: req.body.user.id })];
             case 1:
                 profile = _b.sent();
@@ -60,7 +60,7 @@ router.post('/create', checkToken, express_validator_1.body('gender'), function 
                     return [2 /*return*/, res.status(400).json({ msg: "Profile for this user already exist" })];
                 prof = new Profile({
                     username: req.body.user.id,
-                    music: music,
+                    hobby: hobby,
                     gender: gender,
                     bio: bio,
                     location: location

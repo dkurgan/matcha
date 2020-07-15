@@ -11,12 +11,12 @@ import { Request, Response } from "express";
 router.post('/create', checkToken, body('gender'), async (req: Request, res: Response) => {
     const err = validationResult(req);
     if (!err.isEmpty()) res.status(400).json({ msg: "Gender is required" })
-    const { music, bio, gender, location } = req.body;
+    const { hobby, bio, gender, location } = req.body;
     const profile = await Profile.findOne({ username: req.body.user.id });
     if (profile) return res.status(400).json({ msg: "Profile for this user already exist" });
     const prof = new Profile({
         username: req.body.user.id,
-        music,
+        hobby,
         gender,
         bio,
         location
