@@ -14,7 +14,7 @@ var ProfileSchema = new mongoose_1.default.Schema({
         type: String,
         required: true
     },
-    music: {
+    hobby: {
         type: Array
     },
     bio: {

@@ -10,7 +10,7 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    music: {
+    hobby: {
         type: Array
     },
     bio: {

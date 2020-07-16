@@ -30,7 +30,7 @@ class Login extends React.Component<{loginUser: Function}>{
                     </form>
                     <Grid container justify="center">
                     <Link to='/register'>Register</Link>
-                        <Link to='/reset'>Forget password</Link>
+                    <Link to='/reset'>Forget password</Link>
                         </Grid>
                 </Grid>
             </div>

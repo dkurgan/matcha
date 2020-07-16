@@ -1,9 +1,12 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Button, Typography, Icon } from '@material-ui/core';
 import HobbyList from './HobyList';
-class CreateProfile extends React.Component{
-    state = {hobby: [], bio: null, location: null, selectedFemale: "", selectedMale: "" , selectedFem: "", selectedMal: ""}
+import ProfileFooter from './CreateProfileFooter';
+import {createProfile} from '../actions/profile';
+
+class CreateProfile extends React.Component<{createProfile: Function}>{
+    state = {bio: null, location: null, selectedFemale: "", selectedMale: "" , lookingFem: "", lookingMal: ""}
     selectGender = (gender: string) => {
         if (gender === "selectedFemale") {
             if (this.state.selectedFemale === "selected")
@@ -17,18 +20,36 @@ class CreateProfile extends React.Component{
             else
                 this.setState({selectedMale: "selected"})
         }
-        if (gender === "selectedFem") {
-            if (this.state.selectedFem === "selected")
-                this.setState({ selectedFem: "" });
+        if (gender === "lookingFem") {
+            if (this.state.lookingFem === "selected")
+                this.setState({ lookingFem: "" });
             else
-                this.setState({selectedFem: "selected"})
+                this.setState({lookingFem: "selected"})
         }
-        if (gender === "selectedMal") {
-            if (this.state.selectedMal === 'selected')
-                this.setState({ selectedMal: "" });
+        if (gender === "lookingMal") {
+            if (this.state.lookingMal === 'selected')
+                this.setState({ lookingMal: "" });
             else
-                this.setState({selectedMal: "selected"})
+                this.setState({lookingMal: "selected"})
         }
+    }
+    takeHobbies = (list: []) => {
+        let data = {
+            hobby: list,
+            bio: this.state.bio,
+            location: this.state.location,
+            gender: "",
+            looking: {
+                male: this.state.lookingMal,
+                female: this.state.lookingFem
+            }
+        }
+        if (this.state.selectedFemale) {
+            data.gender = "female";   
+        }
+        else 
+            data.gender = "male"
+        this.props.createProfile(data);
     }
     render() {
         return (
@@ -50,11 +71,12 @@ class CreateProfile extends React.Component{
                     <Typography align="center" variant="h6" gutterBottom>
                     Looking for
                     </Typography>
-                        <Button onClick={(e)=> this.selectGender("selectedFem")} className={`${this.state.selectedFem}`} size="large"><Icon className="fas fa-female" color="secondary" fontSize="large"/></Button>
-                        <Button onClick={(e)=> this.selectGender("selectedMal")}className={`${this.state.selectedMal}`} size="large"><Icon className="fas fa-male" color="secondary" fontSize="large"/></Button>
+                        <Button onClick={(e)=> this.selectGender("lookingFem")} className={`${this.state.lookingFem}`} size="large"><Icon className="fas fa-female" color="secondary" fontSize="large"/></Button>
+                        <Button onClick={(e)=> this.selectGender("lookingMal")}className={`${this.state.lookingMal}`} size="large"><Icon className="fas fa-male" color="secondary" fontSize="large"/></Button>
                     </Grid>
                 </Grid>
-                <HobbyList/>
+                <ProfileFooter />
+                <HobbyList takeHobbie={this.takeHobbies} />
                 </div>
         );
     }
@@ -64,4 +86,4 @@ const mapStateToProps = (state: object) => {
     return state
 }
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(mapStateToProps, {createProfile})(CreateProfile);
