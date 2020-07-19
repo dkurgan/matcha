@@ -68,7 +68,21 @@ router.post('/create', checkToken, express_validator_1.body('gender'), function 
                 return [4 /*yield*/, prof.save()];
             case 2:
                 _b.sent();
-                return [2 /*return*/, res.status(201).json({ msg: "Created" })];
+                return [2 /*return*/, res.status(201).send(prof)];
+        }
+    });
+}); });
+//Get Profile
+router.get('/', checkToken, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var profile;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Profile.findOne({ username: req.body.user.id })];
+            case 1:
+                profile = _a.sent();
+                if (!profile)
+                    return [2 /*return*/, res.status(400).json({ msg: "Cannot find profile" })];
+                return [2 /*return*/, res.send(profile)];
         }
     });
 }); });

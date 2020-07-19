@@ -22,8 +22,16 @@ router.post('/create', checkToken, body('gender'), async (req: Request, res: Res
         location
     });
     await prof.save();
-    return res.status(201).json({ msg: "Created" });
+    return res.status(201).send(prof);
 });
+
+//Get Profile
+router.get('/', checkToken, async (req: Request, res: Response) => {
+    const profile = await Profile.findOne({ username: req.body.user.id });
+    if (!profile)
+        return res.status(400).json({ msg: "Cannot find profile" });
+    return res.send(profile);
+})
 
 //Update Profile
 router.patch('/update', checkToken, async (req: Request, res: Response) => {

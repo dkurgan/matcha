@@ -2,17 +2,18 @@ import React from 'react';
 import { TextField,Grid, Box } from '@material-ui/core';
 
 export default class CreateProfileFooter extends React.Component{
-    render() {
+    state = { location: {} };
+    componentDidMount() {
         console.log(navigator.geolocation.getCurrentPosition((success) => {
             console.log(success);
-        }))
+        }));
+    }
+    render() {
         return (
             <div>
                 <Grid container justify="center">
                     <Grid item>
-                    <Box component="span" m={1}>
-                            <TextField label="Bio"></TextField>
-                            </Box>
+                       <TextField label="Location"></TextField>
                     </Grid>
                 </Grid>
             </div>

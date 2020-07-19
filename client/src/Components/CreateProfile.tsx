@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Button, Typography, Icon } from '@material-ui/core';
 import HobbyList from './HobyList';
-import ProfileFooter from './CreateProfileFooter';
 import {createProfile} from '../actions/profile';
 
 class CreateProfile extends React.Component<{createProfile: Function}>{
@@ -58,6 +57,9 @@ class CreateProfile extends React.Component<{createProfile: Function}>{
                     Tell us more about you
                     </Typography>
                 <Grid container justify="center">
+                    <Button variant="contained" color="primary" >Load avatar</Button>
+                </Grid>
+                <Grid container justify="center">
                     <Grid item > 
                     <Typography align="center" variant="h6" gutterBottom>
                     I am
@@ -75,7 +77,6 @@ class CreateProfile extends React.Component<{createProfile: Function}>{
                         <Button onClick={(e)=> this.selectGender("lookingMal")}className={`${this.state.lookingMal}`} size="large"><Icon className="fas fa-male" color="secondary" fontSize="large"/></Button>
                     </Grid>
                 </Grid>
-                <ProfileFooter />
                 <HobbyList takeHobbie={this.takeHobbies} />
                 </div>
         );

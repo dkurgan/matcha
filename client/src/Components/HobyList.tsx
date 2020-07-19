@@ -1,10 +1,13 @@
 import React from 'react';
 import { TextField, Grid, Button, Typography, Icon, IconButton } from '@material-ui/core';
+import ProfileFooter from './CreateProfileFooter';
 
 export default class HobbyList extends React.Component<{takeHobbie: Function}>{
     state = { arrList: [], hobby: ""};
     addToList = (e: React.MouseEvent) => {
         e.preventDefault();
+        if (this.state.hobby === '')
+            return;
         this.setState({
             arrList: [...this.state.arrList, this.state.hobby],
             hobby: ""
@@ -22,7 +25,7 @@ export default class HobbyList extends React.Component<{takeHobbie: Function}>{
     render() {
         let ItemList = this.state.arrList.map((item, id) => {
             return (
-                   <Grid style={{marginBottom: "10px"}} container justify="center">
+                   <Grid key={id} style={{marginBottom: "10px"}} container justify="center">
                     <Typography>{item}</Typography>
                     <label onClick={(e) => this.deleteList(e, id)} dir="suka">
                         <Icon id="hello"  style={{ marginLeft: "5px" }} className="fas fa-trash-alt" />
@@ -39,6 +42,7 @@ export default class HobbyList extends React.Component<{takeHobbie: Function}>{
                     </form>
                 </Grid>
                 {ItemList}
+                <ProfileFooter />
                 <Grid container justify="center">
                     <Button onClick={() => this.props.takeHobbie(this.state.arrList)}>Create</Button>
                 </Grid>
