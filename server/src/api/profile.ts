@@ -12,6 +12,7 @@ router.post('/create', checkToken, body('gender'), async (req: Request, res: Res
     const err = validationResult(req);
     if (!err.isEmpty()) res.status(400).json({ msg: "Gender is required" })
     const { hobby, bio, gender, location } = req.body;
+    console.log(req.body)
     const profile = await Profile.findOne({ username: req.body.user.id });
     if (profile) return res.status(400).json({ msg: "Profile for this user already exist" });
     const prof = new Profile({

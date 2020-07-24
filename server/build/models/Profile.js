@@ -21,7 +21,7 @@ var ProfileSchema = new mongoose_1.default.Schema({
         type: String
     },
     location: {
-        type: String
+        type: Object
     }
 });
 module.exports = mongoose_1.default.model('profile', ProfileSchema);

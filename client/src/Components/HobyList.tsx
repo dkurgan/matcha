@@ -35,14 +35,14 @@ export default class HobbyList extends React.Component<{takeHobbie: Function}>{
         })
         return (
             <div>
+                <ProfileFooter />
                 <Grid style={{paddingBottom: "10px"}} container justify="center">
                     <form>
-                        <TextField id="standard-basic" className="hobbieClass" onChange={(e) => {this.setState({hobby: e.target.value})}} label="Type your hobbies" />
+                        <TextField style={{marginLeft: "20px"}} id="standard-basic" className="hobbieClass" onChange={(e) => {this.setState({hobby: e.target.value})}} label="Type your hobbies" />
                         <Button style={{marginTop: "20px", marginLeft: "5px"}} type="submit" onClick={(e) => { this.addToList(e) }}>Add</Button>
                     </form>
                 </Grid>
                 {ItemList}
-                <ProfileFooter />
                 <Grid container justify="center">
                     <Button onClick={() => this.props.takeHobbie(this.state.arrList)}>Create</Button>
                 </Grid>

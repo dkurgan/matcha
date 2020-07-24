@@ -53,6 +53,7 @@ router.post('/create', checkToken, express_validator_1.body('gender'), function 
                 if (!err.isEmpty())
                     res.status(400).json({ msg: "Gender is required" });
                 _a = req.body, hobby = _a.hobby, bio = _a.bio, gender = _a.gender, location = _a.location;
+                console.log(req.body);
                 return [4 /*yield*/, Profile.findOne({ username: req.body.user.id })];
             case 1:
                 profile = _b.sent();

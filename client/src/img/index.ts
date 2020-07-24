@@ -1,0 +1,1 @@
+export const defaultAvatar = require('./default-avatar.jpg');
