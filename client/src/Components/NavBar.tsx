@@ -38,7 +38,7 @@ const NavBar = (props: object) => {
     }
   return (
     <div className={classes.root}>
-      <AppBar style={{borderRadius: "15px"}} position="static">
+      {/* <AppBar style={{borderRadius: "15px"}} position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             News
@@ -55,7 +55,7 @@ const NavBar = (props: object) => {
         <MenuItem onClick={() => pushToPage("logout")}>Logout</MenuItem>
       </Menu>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
     </div>
   );
 }
