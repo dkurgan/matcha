@@ -1,66 +1,27 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import { Menu, MenuItem } from '@material-ui/core';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
+import {logo} from '../img';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }),
-);
-
-const NavBar = (props: object) => {
-    const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-  };
-
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-    const pushToPage = (location: string) => {
-        window.location.href = `/#/${location}`;
-        handleClose();
-    }
-  return (
-    <div className={classes.root}>
-      {/* <AppBar style={{borderRadius: "15px"}} position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-                  <Button color="inherit" onClick={handleClick}>{"Login"}</Button>
-                  <Menu
-                      id="simple-menu"
-                      anchorEl={anchorEl}
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}
-      >
-        <MenuItem onClick={() => pushToPage("profile")}>Profile</MenuItem>
-        <MenuItem onClick={() => pushToPage("settings")}>Settings</MenuItem>
-        <MenuItem onClick={() => pushToPage("logout")}>Logout</MenuItem>
-      </Menu>
-        </Toolbar>
-      </AppBar> */}
-    </div>
-  );
+interface NavBarProps{
+  flagLogin: Function
 }
 
-const mapStateToProps = (state: object) => {
-    return state;
+export default class NavBar extends React.Component<NavBarProps>{
+  render() {
+    const { flagLogin } = this.props;
+    return (
+      <div className="navbar">
+        <div className="logo-wrap">
+          <img className="logo" src={logo} alt="Logo-Flame"/>
+          <h3>Matcha</h3>
+        </div>
+        <div className="navbar-btn">
+          <button className="btn btn-small" onClick={()=>flagLogin()}>LOG IN</button>
+        </div>
+        {/* <ul>
+          <li>Profile</li>
+          <li>Settings</li>
+          <li>Logou</li>
+        </ul> */}
+      </div>
+  )}
 }
-export default connect(mapStateToProps)(NavBar);

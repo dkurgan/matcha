@@ -1,104 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-.selected{
-    background-color: grey !important
+.container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 body {
     background-color: #f4f4f4;
 }
-* {
-   box-sizing: border-box;
-   margin: 0;
-   padding: 0;
-  }
 
-  .login-wraper {
-      font-family: 'Raleway', sans-serif;
-      color: #fff;
-      line-height: 1.8;
-      height: 100vh;
-  }
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
 
-  a {
-      text-decoration: none;
+.btn{
+      width: 244px;
+      height: 55px;
+      border-radius: 25px;
+      font-weight: 600;
+      border: none;
+      outline: none;
+      cursor: pointer;
   }
-
-  #container {
-      margin: 30px auto;
-      max-width: 400px;
-      padding: 20px;
-  }
-  .btn{
-      width: 200px;
-      height: 50px;
-      border-radius: 10px;
-      box-shadow: 0 1px 6px 0 rgba(0,0,0,.27);
+  .btn::selection{
+      border: none;
   }
   .btn-general{
+    margin-top: 20px;
+    font-size: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background: rgb(180,58,124);
     background: linear-gradient(90deg, rgba(180,58,124,0.9108018207282913) 0%, rgba(253,29,29,1) 36%, rgba(252,118,69,1) 91%);
     color: white
   }
-  .btn-general:hover{
+  .btn-general:hover,
+  .btn-small:hover{
     background: rgb(240,83,168);
     background: linear-gradient(90deg, rgba(240,83,168,1) 0%, rgba(218,56,56,1) 36%, rgba(236,113,67,1) 91%);
     color: white
-  }
-  .form-wrap {
-      background: white;
-      padding: 15px 25px;
-      color:#333;
-      border-radius: 10px;
-  }
-
-  .form-wrap h1,
-  .form-wrap p {
-      text-align: center;
-  }
-  .form-wrap .form-group {
-      margin-top: 15px;
-  }
-
-  .form-wrap .form-group label {
-      display: block;
-      color: #666;
-  }
-
-  .form-wrap .form-group input {
-      width: 100%;
-      padding: 10px;
-      border: #ddd 1px solid;
-      border-radius: 5px;
-  }
-
-  .form-wrap button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin-top: 20px;
-      background: #49c1a2;
-      color: #fff;
-      border: 0;
-      cursor: pointer;
-  }
-
-  .form-wrap button:hover {
-      background-color: #37a08e;
-  }
-
-  .form-wrap .bottom-text {
-      font-size: 13px;
-      margin-top: 20px;
-  }
-
-  footer {
-      text-align: center;
-      margin-top: 10px;
-  }
-
-  footer a {
-      color: #49c1a2;
-  }
+}
+.btn-small{
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: #fff;
+    color: rgb(180,58,124);
+    font-weight: 600;
+}
+/* Login */
+.login-wraper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+}
+.login-wraper p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: #fff;
+    text-align: center;
+}
+.login-wraper a{
+    text-decoration: underline;
+    color: white
+}
+.swipe-right h1{
+    font-size: 12rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    margin-bottom: 30px;
+}
+/* Navbar */
+.navbar{
+    display: flex;
+    padding: 10px 50px;    
+    height: 70px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.navbar-btn{
+    padding-top: 12px;
+}
+.logo-wrap{
+    width: 100px;
+    display: flex;
+    align-items: center;
+}
+.logo-wrap h3{
+    padding-top: 12px;
+    margin-left: 10px;
+    font-size: 35px;
+    font-weight: 600;
+    color: #fff;
+}
+.logo{
+    width: 50px;
+}
+/* Login Form */
+.shadow-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+}
+.shadow{
+    position: fixed;
+    width: 100%;
+    height: 110vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+.form{
+    position: fixed;
+    text-align: center;
+    background: #fff;
+    height: 600px;
+    width: 400px;
+    border-radius: 10px;
+    z-index: 3;
+    transition: 1s ease-in-out;
+}
+.form .logo{
+    margin: 20px;
+    width: 30px;
+}
+.form h2{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+}
+.form p{
+    margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px 15px;
+    color: black;
+}
+.form a{
+    color: grey;
+    text-decoration: underline;
+}
+form{
+    margin: 50px 0px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+form .form-group input{
+    text-align: center;
+    cursor: pointer;
+    width: 80%;
+    height: 30px;
+    border: none;
+    padding-left: 10px;
+    border-bottom: 1px rgb(180,58,124) solid;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 350;
+}
+form .form-group input:hover{
+    border-bottom: 2px rgb(180,58,124) solid;
+}
+form .form-group input:focus{
+    outline: none;
+    border-bottom: 2px rgb(180,58,124) solid;
+}
+.footer-form{
+    margin-top: 20px;
+}

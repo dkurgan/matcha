@@ -23,7 +23,9 @@ export const logOutUser = () => {
 
 export const registerUser = (userData: userRegister) => async (dispatch: Dispatch) => {
     const token = await api.post('/auth/register', userData);
-    localStorage.setItem('tinderbae-token', token.data);
+    if (token) {
+        localStorage.setItem('tinderbae-token', token.data);
+    }
     dispatch({
         type: ActionTypes.REGISTER
     })
