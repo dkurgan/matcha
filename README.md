@@ -1,2 +1,4 @@
-# matcha
-Dating web app, currently in progress 
+# Matcha
+## Currently in progress
+Tinder-type web application
+
