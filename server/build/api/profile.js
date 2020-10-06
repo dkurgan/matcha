@@ -45,14 +45,14 @@ var verifyPassword = require('../middleware/verifyPassword');
 var express_validator_1 = require("express-validator");
 //Create Profile
 router.post('/create', checkToken, express_validator_1.body('gender'), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var err, _a, hobby, bio, gender, location, profile, prof;
+    var err, _a, hobby, gender, firstName, profile, prof;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 err = express_validator_1.validationResult(req);
                 if (!err.isEmpty())
                     res.status(400).json({ msg: "Gender is required" });
-                _a = req.body, hobby = _a.hobby, bio = _a.bio, gender = _a.gender, location = _a.location;
+                _a = req.body, hobby = _a.hobby, gender = _a.gender, firstName = _a.firstName;
                 console.log(req.body);
                 return [4 /*yield*/, Profile.findOne({ username: req.body.user.id })];
             case 1:
@@ -63,8 +63,7 @@ router.post('/create', checkToken, express_validator_1.body('gender'), function 
                     username: req.body.user.id,
                     hobby: hobby,
                     gender: gender,
-                    bio: bio,
-                    location: location
+                    firstName: firstName
                 });
                 return [4 /*yield*/, prof.save()];
             case 2:

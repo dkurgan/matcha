@@ -1,113 +1,70 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Button, Typography, Icon,Avatar } from '@material-ui/core';
 import HobbyList from './HobyList';
 import { createProfile } from '../actions/profile';
 import { defaultAvatar } from '../img';
-import Geocode from "react-geocode";
+import { TextField} from '@material-ui/core';
+import NavBarGeneral from './NavBarGeneral';
 
-class CreateProfile extends React.Component<{createProfile: Function}>{
-    state = { bio: null, location: null, selectedFemale: "", selectedMale: "", lookingFem: "", lookingMal: "" }
-    componentDidMount() {
-       navigator.geolocation.getCurrentPosition((success) => {
-            this.setState({
-                location: {
-                    lon: success.coords.longitude,
-                    lat: success.coords.latitude
-                }
-            });
-       });
-       Geocode.fromLatLng("48.8583701", "2.2922926").then(
-        response => {
-          const address = response.results[0].formatted_address;
-          console.log(address);
-        },
-        error => {
-          console.error(error);
+class CreateProfile extends React.Component<{ createProfile: Function }>{
+    state = {pressedMale: "pressed", pressedFemale: "", dateDay: "", dateMM: "", dateYear: "", name: "", hobbie: []}
+    iconPressed = (e: React.MouseEvent) => {
+        if (this.state.pressedFemale === "pressed") {
+            this.setState({ pressedFemale: "" });
+            this.setState({ pressedMale: "pressed" });
         }
-      );
+        else
+            this.setState({ pressedMale: "", pressedFemale: "pressed" });
     }
-    selectGender = (gender: string) => {
-        if (gender === "selectedFemale") {
-            if (this.state.selectedMale === "selected")
-                this.setState({ selectedMale: "" });
-            if (this.state.selectedFemale === "selected")
-                this.setState({ selectedFemale: "" });
-            else
-                this.setState({selectedFemale: "selected"})
-        }
-        if (gender === "selectedMale") {
-            if (this.state.selectedFemale === "selected")
-                this.setState({ selectedFemale: "" });
-            if (this.state.selectedMale === 'selected')
-                this.setState({ selectedMale: "" });
-            else
-                this.setState({selectedMale: "selected"})
-        }
-        if (gender === "lookingFem") {
-            if (this.state.lookingFem === "selected")
-                this.setState({ lookingFem: "" });
-            else
-                this.setState({lookingFem: "selected"})
-        }
-        if (gender === "lookingMal") {
-            if (this.state.lookingMal === 'selected')
-                this.setState({ lookingMal: "" });
-            else
-                this.setState({lookingMal: "selected"})
-        }
-    }
-    takeHobbies = (list: []) => {
-        let data = {
-            hobby: list,
-            bio: this.state.bio,
-            location: this.state.location,
-            gender: "",
-            looking: {
-                male: this.state.lookingMal,
-                female: this.state.lookingFem
-            }
-        }
-        if (this.state.selectedFemale) {
-            data.gender = "female";   
-        }
-        if (this.state.selectedMale) {
-            data.gender = "male"
-        }
-        if (data.gender === "")
+    createProfile = () => {
+        const { pressedMale, pressedFemale, dateDay, dateMM, dateYear, name, hobbie } = this.state;
+        if (!dateDay || !dateMM || !dateYear || !name) {
+            console.log("alert here");
             return;
-        this.props.createProfile(data);
+        }
+        this.props.createProfile({
+            gender: pressedFemale || pressedMale,
+            dateBirth: dateDay + dateMM + dateYear,
+            firstName: name,
+            hobbie
+        });
+    }
+    updateHobbie = (arr: string[]) => {
+        this.setState({ hobbie: arr });
     }
     render() {
         return (
             <div>
-                <Typography align="center" variant="h3" gutterBottom>
-                    Tell us more about you
-                    </Typography>
-                <Grid container justify="center">
-                    <Grid item xs={2} alignItems="center" >
-                        <Avatar alt="Remy Sharp" src={defaultAvatar} />
-                        <br/>
-                        <Button style={{ marginTop: "7px" }} variant="contained" color="primary" >Load avatar</Button>
-                        </Grid>
-                    <Grid  item xs={2}> 
-                        <Typography align="center" variant="h6" gutterBottom>
-                            I am
-                    </Typography>
-                        <Grid item>
-                        <Button onClick={(e)=> this.selectGender("selectedFemale")} className={`${this.state.selectedFemale}`} size="large"><Icon className="fas fa-female" color="secondary" fontSize="large"/></Button>
-                            <Button onClick={(e) => this.selectGender("selectedMale")} className={`${this.state.selectedMale}`} size="large"><Icon className="fas fa-male" color="secondary" fontSize="large" /></Button>
-                            </Grid>
-                    <Typography align="center" variant="h6" gutterBottom>
-                    Looking for
-                    </Typography>
-                        <Button onClick={(e)=> this.selectGender("lookingFem")} className={`${this.state.lookingFem}`} size="large"><Icon className="fas fa-female" color="secondary" fontSize="large"/></Button>
-                        <Button onClick={(e)=> this.selectGender("lookingMal")}className={`${this.state.lookingMal}`} size="large"><Icon className="fas fa-male" color="secondary" fontSize="large"/></Button>
-                    </Grid>
-                </Grid>
-                <Grid container justify="center">
-                    <HobbyList takeHobbie={this.takeHobbies} />
-                    </Grid>
+                <NavBarGeneral/>
+            <div className="create-profile">
+                <h1>Tell us more about you</h1>
+                <div className="split">
+                <div className="profile-photos">
+                    <div className="profile-avatar">
+                                <label htmlFor="upload-photo"><img src={defaultAvatar} alt="default-avatar" className={`picture_border`} /></label>
+                                <input type="file" id="upload-photo" style={{display: "none"}} accept="image/*"/>
+                    </div>
+                        <div className="hobbie">
+                            <h3>Add your interests</h3>
+                            <HobbyList updateHobbie={this.updateHobbie}/>
+                        </div>
+                </div>
+                    <div className="profile-selector">
+                        <TextField onChange={(e) => this.setState({name: e.target.value})} className="name" label="First Name" />
+                    <div className="select-gender">
+                        <h3>Gender</h3>
+                            <button id="male" onClick={this.iconPressed} className={`${this.state.pressedMale}`}><i className={`fas fa-male largeIcon`}></i></button>
+                        <button id="female" onClick={this.iconPressed} className={`${this.state.pressedFemale}`}><i className={`fas fa-female largeIcon`}></i></button>
+                    </div>
+                    <div className="date-birth">
+                        <input maxLength={2} onChange={(e) => this.setState({dateDay: e.target.value})} placeholder="MM"/>
+                        <input maxLength={2} onChange={(e) => this.setState({dateMM: e.target.value})} placeholder="DD"/>
+                        <input maxLength={4} onChange={(e) => this.setState({dateYear: e.target.value})}placeholder="YYY"/>
+                        </div>
+                </div>
+                </div>
+                <button onClick={this.createProfile} className="btn btn-primary">Create</button>
+                </div>
                 </div>
         );
     }

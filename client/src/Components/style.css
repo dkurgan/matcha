@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('/font-awesome-4.6.3/css/font-awesome.min.css');
 *{
     padding: 0;
     margin: 0;
@@ -18,7 +20,10 @@ a{
     text-decoration: none;
     cursor: pointer;
 }
-
+h3{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+}
 .btn{
       width: 244px;
       height: 55px;
@@ -27,6 +32,7 @@ a{
       border: none;
       outline: none;
       cursor: pointer;
+      transition: 300ms ease-in;
   }
   .btn::selection{
       border: none;
@@ -37,6 +43,21 @@ a{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background: rgb(180,58,124);
     background: linear-gradient(90deg, rgba(180,58,124,0.9108018207282913) 0%, rgba(253,29,29,1) 36%, rgba(252,118,69,1) 91%);
+    color: white
+  }
+  .btn-primary{
+    margin-top: 20px;
+    font-size: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: 1px solid rgb(180,58,124);
+    color: rgb(180,58,124);
+    background-color: #f4f4f4;
+  }
+  .btn-primary:hover{
+    margin-top: 20px;
+    font-size: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: rgb(180,58,124);
     color: white
   }
   .btn-general:hover,
@@ -53,9 +74,34 @@ a{
     background: #fff;
     color: rgb(180,58,124);
     font-weight: 600;
+    transition: 300ms ease-in;
+}
+.btn-add{
+    width: 60px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: 1px solid rgb(180,58,124);
+    color: rgb(180,58,124);
+    background-color: #f4f4f4;
+    transition: 300ms ease-in;
+}
+.btn-add::selection,
+.btn-add:focus{
+    border: 1px solid rgb(180,58,124);
+    outline: none;
+}
+.btn-add:hover{
+    margin-top: 20px;
+    font-size: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: rgb(180,58,124);
+    color: white
 }
 /* Login */
 .login-wraper{
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,9 +122,10 @@ a{
     font-size: 12rem;
     font-family: Arial, Helvetica, sans-serif;
     color: #fff;
+    font-weight: 500;
     margin-bottom: 30px;
 }
-/* Navbar */
+/* Navbar  at Login Page*/
 .navbar{
     display: flex;
     padding: 10px 50px;    
@@ -100,6 +147,25 @@ a{
     font-size: 35px;
     font-weight: 600;
     color: #fff;
+}
+.logo-dark{
+    width: 100px;
+    display: flex;
+    align-items: center;
+    
+}
+.logo-dark{
+    padding: 12px;
+    font-size: 35px;
+    font-weight: 600;
+    color: rgb(180,58,124);
+    background: #fff;
+    width: 170px;
+    height: 60px;
+    border-radius: 10px;
+    /* border-top-left-radius: 10px;
+    border-top-right-radius: 10px; */
+    /* border-bottom: 3px solid rgb(180,58,124); */
 }
 .logo{
     width: 50px;
@@ -174,4 +240,115 @@ form .form-group input:focus{
 }
 .footer-form{
     margin-top: 20px;
+}
+
+/* Create Profile */
+.create-profile{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background: url("https://images.unsplash.com/photo-1485841890310-6a055c88698a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80") no-repeat center center/cover; */
+    height: 90vh;
+}
+.create-profile h1{
+    font-family: 'Open Sans', sans-serif;
+}
+.create-profile .split{
+    padding-left: 30px 30px;
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+.create-profile .profile-photos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-top: 50px;
+    padding-left: 20px;
+}
+.create-profile .profile-photos .profile-avatar img{
+    width: 250px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.create-profile .profile-photos .profile-avatar img:hover{
+    opacity: 0.8;
+}
+.create-profile .profile-photos .profile-cliked img{
+    border: 1px solid rgb(180,58,124);
+}
+.profile-photos .photos-container{
+    border-bottom: 1px rgb(180,58,124) solid;
+}
+.profile-photos .photos-container img{
+    width: 100px;
+    margin: 10px;
+    border-radius: 10px;
+}
+.create-profile .profile-selector{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    padding-left: 20px;
+}
+.create-profile .select-gender button{
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background: rgb(180,58,124);
+}
+.pressed{
+   opacity: 0.7 !important;
+}
+.profile-selector .name{
+    max-width: 50%;
+    margin-bottom: 20px;
+    border-bottom: 2px rgb(180,58,124) solid;
+}
+
+.profile-selector .name:focus,
+.profile-selector .name:hover{
+    outline: none !important;
+    border: none !important;
+}
+.largeIcon{
+    font-size: 30px;
+    color:#fff;
+}
+.picture_border{
+    border: 4px rgb(180,58,124) solid;
+}
+.profile-selector .date-birth{
+    display: flex;
+    flex: row;
+    justify-content: center;
+}
+.profile-selector .date-birth input{
+    text-align: center;
+    padding: 5px;
+    font-size: 1.2rem;
+    width: 65px;
+    height: 35px;
+    border: 1px rgb(180,58,124) solid;
+    margin: 15px;
+    border-radius: 5px;
+}
+.profile-selector .date-birth input:focus{
+    outline: none;
+}
+.hobbie-items{
+    width: 50% !important;
+    height: 30px;
+    border: 1px rgb(180,58,124) solid;
+    border-radius: 10px;
+    background: #fff;
 }

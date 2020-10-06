@@ -1,11 +1,11 @@
 import React from 'react';
 import {logo} from '../img';
 
-interface NavBarProps{
+interface NavBarLoginProps{
   flagLogin: Function
 }
 
-export default class NavBar extends React.Component<NavBarProps>{
+export default class NavBarLogin extends React.Component<NavBarLoginProps>{
   render() {
     const { flagLogin } = this.props;
     return (

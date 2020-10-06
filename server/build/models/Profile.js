@@ -14,6 +14,10 @@ var ProfileSchema = new mongoose_1.default.Schema({
         type: String,
         required: true
     },
+    firstName: {
+        type: String,
+        required: true
+    },
     hobby: {
         type: Array
     },

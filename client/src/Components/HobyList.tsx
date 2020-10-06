@@ -1,17 +1,21 @@
 import React from 'react';
 import { TextField, Grid, Button, Typography, Icon, IconButton } from '@material-ui/core';
-import ProfileFooter from './CreateProfileFooter';
 
-export default class HobbyList extends React.Component<{takeHobbie: Function}>{
+export default class HobbyList extends React.Component<{updateHobbie: Function}>{
     state = { arrList: [], hobby: ""};
     addToList = (e: React.MouseEvent) => {
         e.preventDefault();
         if (this.state.hobby === '')
             return;
+        if (this.state.arrList.length === 3) {
+            (document?.getElementById("standard-basic") as HTMLInputElement).value = "";
+            return;
+        }
         this.setState({
             arrList: [...this.state.arrList, this.state.hobby],
             hobby: ""
         });
+        this.props.updateHobbie(this.state.arrList);
         (document?.getElementById("standard-basic") as HTMLInputElement).value = "";
     }
     deleteList = (e: React.MouseEvent, id: number) => {
@@ -20,32 +24,34 @@ export default class HobbyList extends React.Component<{takeHobbie: Function}>{
         if (id === 0)
             tmp = [];
         this.setState({ arrList: tmp.concat(this.state.arrList.slice(id + 1, this.state.arrList.length)) });
-        console.log(tmp)
+        this.props.updateHobbie(this.state.arrList);
     }
     render() {
         let ItemList = this.state.arrList.map((item, id) => {
             return (
-                   <Grid key={id} style={{marginBottom: "10px"}} container justify="center">
-                    <Typography>{item}</Typography>
+                <Grid key={id} style={{ margin: "10px", display: "flex", alignContent: "center" }} className="hobbie-items" justify="center">
+                    <Typography style={{marginTop: "3px"}}>{item}</Typography>
                     <label onClick={(e) => this.deleteList(e, id)} dir="suka">
-                        <Icon id="hello"  style={{ marginLeft: "5px" }} className="fas fa-trash-alt" />
-                        </label>
+                        <div style={{alignContent:  "end"}}>
+                            <Icon id="hello" style={{ marginLeft: "5px", fontSize: "20px", marginTop: "3px", color: "rgb(180,58,124)" }} className="fas fa-trash-alt" />
+                            </div>
+                    </label>
                     </Grid>
             )
         })
         return (
-            <div>
-                <ProfileFooter />
-                <Grid style={{paddingBottom: "10px"}} container justify="center">
+            <div style={{ width: "400px", height: "320px" }}>
+                <div>
+                <div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
                     <form>
                         <TextField style={{marginLeft: "20px"}} id="standard-basic" className="hobbieClass" onChange={(e) => {this.setState({hobby: e.target.value})}} label="Type your hobbies" />
-                        <Button style={{marginTop: "20px", marginLeft: "5px"}} type="submit" onClick={(e) => { this.addToList(e) }}>Add</Button>
                     </form>
-                </Grid>
-                {ItemList}
-                <Grid container justify="center">
-                    <Button onClick={() => this.props.takeHobbie(this.state.arrList)}>Create</Button>
-                </Grid>
+                    <button style={{marginTop: "12px", marginLeft: "10px"}} className="btn-add" type="submit" onClick={(e) => { this.addToList(e) }}>Add</button>
+                    </div>
+                    <div style={{display: "flex", flexDirection: "column", alignContent: "center", justifyContent: "center", marginLeft: "100px"}}>
+                    {ItemList}
+                    </div>
+                    </div>
             </div>
         )
     }
